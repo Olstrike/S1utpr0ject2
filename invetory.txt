@@ -1,0 +1,2 @@
+health potion x2
+bandage x5
