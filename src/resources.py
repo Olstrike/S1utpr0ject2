@@ -1,5 +1,7 @@
 from random import randint, choice
 
+from Main import Goblin_damage, Skeleton_armor, Skeleton_damage, Skeleton_health
+
 # globala vareabler
 
 class Weapon: 
@@ -11,9 +13,6 @@ class Weapon:
         return self.damage
 
 #BRYTER MOT STANDARD
-GOBLIN_WEAPONS = [Weapon("Rusty Cleaver", 2),
-                Weapon("Rusty spear", 3),
-                Weapon("Stone Axe", 1)]
 
 
 class Character:
@@ -63,7 +62,137 @@ class Character:
     def get_attributes(self):
         return self.name, self.health, self.attack, self.armor
 
-class Goblin:
+#Här skapar jag de motståndarna som finns och ger dem koden som gör att de funkar.
+class goblin:
+    def __init__(self, health, armor, id):
+            self.health = health
+            self.armor = armor
+            self.id = id
+            self.weapon = choice(Goblin_damage)
+            self.attack = self.weapon.get_damage()
+    
+    def take_damage(self, damage):
+        relative_damage = damage - self.armor
+        if relative_damage > 0:
+            self.health -= relative_damage
+        if self.health < 0: self.health = 0
+        
+    def __str__(self) -> str:
+        return f"Goblin #{self.id}\nHealth: {self.health}\nAttack: {self.attack}\nArmor: {self.armor}"
+
+    def get_health(self):
+        return self.health
+    
+    def get_attack(self):
+        return self.attack
+    
+    def get_name(self):
+        return f"Goblin #{self.id}"
+    
+class skeleton:
+    def __init__(self, health, armor, id):
+            self.health = Skeleton_health
+            self.armor = Skeleton_armor
+            self.id = id
+            self.weapon = Skeleton_damage
+            self.attack = self.weapon.get_damage()
+    
+    def take_damage(self, damage):
+        relative_damage = damage - self.armor
+        if relative_damage > 0:
+            self.health -= relative_damage
+        if self.health < 0: self.health = 0
+        
+    def __str__(self) -> str:
+        return f"Skeleton #{self.id}\nHealth: {self.health}\nAttack: {self.attack}\nArmor: {self.armor}"
+
+    def get_health(self):
+        return self.health
+    
+    def get_attack(self):
+        return self.attack
+    
+    def get_name(self):
+        return f"Skeleton #{self.id}"
+
+class ork:
+    def __init__(self, health, armor, id):
+            self.health = health
+            self.armor = armor
+            self.id = id
+            self.weapon = choice(Ork_WEAPONS)
+            self.attack = self.weapon.get_damage()
+    
+    def take_damage(self, damage):
+        relative_damage = damage - self.armor
+        if relative_damage > 0:
+            self.health -= relative_damage
+        if self.health < 0: self.health = 0
+        
+    def __str__(self) -> str:
+        return f"Ork #{self.id}\nHealth: {self.health}\nAttack: {self.attack}\nArmor: {self.armor}"
+
+    def get_health(self):
+        return self.health
+    
+    def get_attack(self):
+        return self.attack
+    
+    def get_name(self):
+        return f"Ork #{self.id}"
+
+class darkelf:
+    def __init__(self, health, armor, id):
+            self.health = health
+            self.armor = armor
+            self.id = id
+            self.weapon = choice(Darkelf_WEAPONS)
+            self.attack = self.weapon.get_damage()
+    
+    def take_damage(self, damage):
+        relative_damage = damage - self.armor
+        if relative_damage > 0:
+            self.health -= relative_damage
+        if self.health < 0: self.health = 0
+        
+    def __str__(self) -> str:
+        return f"Darkelf #{self.id}\nHealth: {self.health}\nAttack: {self.attack}\nArmor: {self.armor}"
+
+    def get_health(self):
+        return self.health
+    
+    def get_attack(self):
+        return self.attack
+    
+    def get_name(self):
+        return f"Darkelf #{self.id}"
+
+class high_demon:
+    def __init__(self, health, armor, id):
+            self.health = health
+            self.armor = armor
+            self.id = id
+            self.weapon = choice(Demon_WEAPONS)
+            self.attack = self.weapon.get_damage()
+    
+    def take_damage(self, damage):
+        relative_damage = damage - self.armor
+        if relative_damage > 0:
+            self.health -= relative_damage
+        if self.health < 0: self.health = 0
+        
+    def __str__(self) -> str:
+        return f"High-demon #{self.id}\nHealth: {self.health}\nAttack: {self.attack}\nArmor: {self.armor}"
+
+    def get_health(self):
+        return self.health
+    
+    def get_attack(self):
+        return self.attack
+    
+    def get_name(self):
+        return f"Demon #{self.id}"
+
     
     def __init__(self, health, armor, id):
         self.health = health
@@ -89,7 +218,7 @@ class Goblin:
     
     def get_name(self):
         return f"Goblin #{self.id}"
-    
+#----------------------    
 
 def save_character(chars : list()):
     save_list = []
